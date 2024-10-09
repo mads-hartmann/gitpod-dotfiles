@@ -1,12 +1,8 @@
-# My Gitpod specific dotfiles.
-#
-# See the official docs
-#   https://www.gitpod.io/docs/configure/user-settings/dotfiles
-#
-# For debugging
-#   cat /home/gitpod/.dotfiles.log
-#
-
+# These dotfiles are for Gitpod Flex
 git config --global --add --bool push.autoSetupRemote true
+git config --global alias.st "status"
+git config --global alias.co "checkout"
+git config --global alias.tidy "!git branch --merged | grep -E -v '(master|staging)' | grep -E -v '^\\*' | xargs git branch -d"
+git config --global core.editor "code --wait"
 
-echo 'export EDITOR="code --wait"' >> $HOME/.bashrc.d/100-environment-variables
+echo 'export EDITOR="code --wait"' >> $HOME/.profile
