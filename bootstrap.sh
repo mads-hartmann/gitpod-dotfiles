@@ -7,5 +7,6 @@ git config --global alias.s "switch"
 git config --global alias.co "checkout"
 git config --global alias.tidy "!git branch | grep -E -v 'main' | xargs git branch -d"
 git config --global core.editor "cursor --wait"
+git config --global push.autoSetupRemote true
 
 echo 'export EDITOR="cursor --wait"' >> $HOME/.profile
