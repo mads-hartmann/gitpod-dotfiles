@@ -10,3 +10,9 @@ git config --global core.editor "cursor --wait"
 git config --global push.autoSetupRemote true
 
 echo 'export EDITOR="cursor --wait"' >> $HOME/.profile
+
+if command -v sudo >/dev/null 2>&1; then
+    sudo chsh "$(id -un)" --shell "/usr/bin/zsh"
+else
+    echo "No sudo access available - skipping shell change"
+fi
