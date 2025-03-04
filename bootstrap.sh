@@ -18,3 +18,15 @@ else
 fi
 
 echo 'export PS1="%B%F{green}%n@%m%f:%F{blue}%~%f%b$ "' >> $HOME/.zshrc
+
+FZF_VERSION="0.60.3"
+if ! command -v fzf >/dev/null 2>&1; then
+    echo "Installing fzf..."
+    curl -L https://github.com/junegunn/fzf/releases/download/v${FZF_VERSION}/fzf-${FZF_VERSION}-linux_amd64.tar.gz | tar xzvf -
+    sudo mv fzf /usr/local/bin
+    echo "fzf installation completed"
+else
+    echo "fzf is already installed"
+fi
+echo "Configuring fzf..."
+echo "source <(fzf --zsh)" >> $HOME/.zshrc
