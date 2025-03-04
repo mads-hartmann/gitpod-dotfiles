@@ -1,5 +1,5 @@
 # These dotfiles are for Gitpod Flex
-git config --global --add --bool push.autoSetupRemote true
+git config --global --replace-all --bool push.autoSetupRemote true
 git config --global alias.b "branch"
 git config --global alias.c "commit"
 git config --global alias.st "status"
@@ -16,3 +16,5 @@ if command -v sudo >/dev/null 2>&1; then
 else
     echo "No sudo access available - skipping shell change"
 fi
+
+echo 'export PS1="%B%F{green}%n@%m%f:%F{blue}%~%f%b$ "' >> $HOME/.zshrc
