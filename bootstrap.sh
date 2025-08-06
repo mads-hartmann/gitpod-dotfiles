@@ -16,13 +16,12 @@ else
     echo "No sudo access available - skipping shell change"
 fi
 
-# Set environment name using gitpod CLI
+# Include the environment name in the zsh prompt
 if command -v jq; then
-    export ENVIRONMENT_NAME="$(gitpod environment get $GITPOD_ENVIRONMENT_ID -o json | jq -r ".[0].metadata.name // .[0].id")"
+    echo 'export ENVIRONMENT_NAME=$(gitpod environment get $GITPOD_ENVIRONMENT_ID -o json | jq -r ".[0].metadata.name // .[0].id")' >> $HOME/.zshrc
 else
-    export ENVIRONMENT_NAME="$GITPOD_ENVIRONMENT_ID"
+    echo 'export ENVIRONMENT_NAME="$GITPOD_ENVIRONMENT_ID"' >> $HOME/.zshrc
 fi
-echo "export ENVIRONMENT_NAME=${ENVIRONMENT_NAME}" >> $HOME/.zshrc
 echo 'export PS1="%B%F{yellow}[${ENVIRONMENT_NAME}]%f %F{green}%n@%m%f:%F{blue}%~%f%b$ "' >> $HOME/.zshrc
 
 FZF_VERSION="0.60.3"
