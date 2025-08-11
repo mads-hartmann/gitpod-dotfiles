@@ -6,9 +6,11 @@ git config --global alias.st "status"
 git config --global alias.s "switch"
 git config --global alias.co "checkout"
 git config --global alias.tidy "!git branch | grep -E -v 'main' | xargs git branch -d"
-git config --global core.editor "cursor --wait"
+# git config --global core.editor "cursor --wait"
+git config --global core.editor "code --wait"
 
-echo 'export EDITOR="cursor --wait"' >> $HOME/.profile
+# echo 'export EDITOR="cursor --wait"' >> $HOME/.profile
+echo 'export EDITOR="code --wait"' >> $HOME/.profile
 
 if command -v sudo >/dev/null 2>&1; then
     sudo chsh "$(id -un)" --shell "/usr/bin/zsh"
