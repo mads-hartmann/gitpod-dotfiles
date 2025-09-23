@@ -6,6 +6,7 @@ git config --global alias.st "status"
 git config --global alias.s "switch"
 git config --global alias.co "checkout"
 git config --global alias.tidy "!git branch | grep -E -v 'main' | xargs git branch -d"
+git config --global alias.ds "diff --stat origin/main...HEAD"
 # git config --global core.editor "cursor --wait"
 git config --global core.editor "code --wait"
 
