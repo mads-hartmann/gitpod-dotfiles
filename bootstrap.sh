@@ -38,3 +38,9 @@ else
 fi
 echo "Configuring fzf..."
 echo "source <(fzf --zsh)" >> $HOME/.zshrc
+
+if ! command -v tig >/dev/null 2>&1; then
+    apt-get update && apt-get install tig
+else
+    echo "tig is already installed
+fi
