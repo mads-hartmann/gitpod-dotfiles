@@ -7,11 +7,16 @@ git config --global alias.s "switch"
 git config --global alias.co "checkout"
 git config --global alias.tidy "!git branch | grep -E -v 'main' | xargs git branch -d"
 git config --global alias.ds "diff --stat origin/main...HEAD"
-# git config --global core.editor "cursor --wait"
-git config --global core.editor "code --wait"
-
-# echo 'export EDITOR="cursor --wait"' >> $HOME/.profile
-echo 'export EDITOR="code --wait"' >> $HOME/.profile
+# Detect which editor is available and set accordingly
+if command -v cursor > /dev/null 2>&1; then
+    git config --global core.editor "cursor --wait"
+    echo 'export EDITOR="cursor --wait"' >> $HOME/.profile
+elif command -v code > /dev/null 2>&1; then
+    git config --global core.editor "code --wait"
+    echo 'export EDITOR="code --wait"' >> $HOME/.profile
+else
+    echo "Warning: Neither code nor cursor command found"
+fi
 
 if command -v sudo >/dev/null 2>&1; then
     sudo chsh "$(id -un)" --shell "/usr/bin/zsh"
