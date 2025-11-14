@@ -7,16 +7,6 @@ git config --global alias.s "switch"
 git config --global alias.co "checkout"
 git config --global alias.tidy "!git branch | grep -E -v 'main' | xargs git branch -d"
 git config --global alias.ds "diff --stat origin/main...HEAD"
-# Detect which editor is available and set accordingly
-if command -v cursor > /dev/null 2>&1; then
-    git config --global core.editor "cursor --wait"
-    echo 'export EDITOR="cursor --wait"' >> $HOME/.profile
-elif command -v code > /dev/null 2>&1; then
-    git config --global core.editor "code --wait"
-    echo 'export EDITOR="code --wait"' >> $HOME/.profile
-else
-    echo "Warning: Neither code nor cursor command found"
-fi
 
 if command -v sudo >/dev/null 2>&1; then
     sudo chsh "$(id -un)" --shell "/usr/bin/zsh"
@@ -48,4 +38,19 @@ if ! command -v tig >/dev/null 2>&1; then
     apt-get update && apt-get install -y tig
 else
     echo "tig is already installed"
+fi
+
+# Handle .profile setup
+DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
+if [ ! -e "$HOME/.profile" ]; then
+    # If ~/.profile doesn't exist, symlink it
+    ln -s "$DOTFILES_DIR/.profile" "$HOME/.profile"
+    echo "Created symlink: ~/.profile -> $DOTFILES_DIR/.profile"
+else
+    # If ~/.profile exists, append source line if not already present
+    if ! grep -q "source.*.profile" "$HOME/.profile" 2>/dev/null; then
+        echo '' >> "$HOME/.profile"
+        echo "source \"$DOTFILES_DIR/.profile\"" >> "$HOME/.profile"
+        echo "Added source line to existing ~/.profile"
+    fi
 fi
