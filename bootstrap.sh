@@ -40,7 +40,7 @@ else
     echo "tig is already installed"
 fi
 
-# Handle .profile setup
+# Ensure .profile exists
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 if [ ! -e "$HOME/.profile" ]; then
     # If ~/.profile doesn't exist, symlink it
@@ -53,4 +53,10 @@ else
         echo "source \"$DOTFILES_DIR/.profile\"" >> "$HOME/.profile"
         echo "Added source line to existing ~/.profile"
     fi
+fi
+
+# Ensure ~/.zshrc sources ~/.profile
+if ! grep -q "source.*\.profile" $HOME/.zshrc 2>/dev/null; then
+    echo '' >> $HOME/.zshrc
+    echo 'source "$HOME/.profile"' >> $HOME/.zshrc
 fi
