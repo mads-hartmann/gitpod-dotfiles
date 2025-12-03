@@ -14,14 +14,6 @@ else
     echo "No sudo access available - skipping shell change"
 fi
 
-# Include the environment name in the zsh prompt
-if command -v jq; then
-    echo 'export ENVIRONMENT_NAME=$(gitpod environment get $GITPOD_ENVIRONMENT_ID -o json | jq -r ".[0].metadata.name // .[0].id")' >> $HOME/.zshrc
-else
-    echo 'export ENVIRONMENT_NAME="$GITPOD_ENVIRONMENT_ID"' >> $HOME/.zshrc
-fi
-echo 'export PS1="%B%F{yellow}[${ENVIRONMENT_NAME}]%f %F{green}%n@%m%f:%F{blue}%~%f%b$ "' >> $HOME/.zshrc
-
 FZF_VERSION="0.60.3"
 if ! command -v fzf >/dev/null 2>&1; then
     echo "Installing fzf..."
@@ -31,8 +23,6 @@ if ! command -v fzf >/dev/null 2>&1; then
 else
     echo "fzf is already installed"
 fi
-echo "Configuring fzf..."
-echo "source <(fzf --zsh)" >> $HOME/.zshrc
 
 if ! command -v tig >/dev/null 2>&1; then
     apt-get update && apt-get install -y tig
