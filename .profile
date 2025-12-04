@@ -9,7 +9,7 @@ git config --global core.editor "$EDITOR"
 
 # Include the environment name in the zsh prompt
 if command -v jq; then
-    export ENVIRONMENT_NAME=$(gitpod environment get $GITPOD_ENVIRONMENT_ID -o json | jq -r ".[0].metadata.name // .[0].id")
+    export ENVIRONMENT_NAME=$(gitpod environment get -o json | jq -r ".[0].metadata.name // .[0].id")
 else
     export ENVIRONMENT_NAME="$GITPOD_ENVIRONMENT_ID"
 fi
