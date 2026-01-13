@@ -50,3 +50,8 @@ if ! grep -q "source.*\.profile" $HOME/.zshrc 2>/dev/null; then
     echo '' >> $HOME/.zshrc
     echo 'source "$HOME/.profile"' >> $HOME/.zshrc
 fi
+
+# Configure fzf shell integration for zsh
+if ! grep -q "source <(fzf --zsh)" $HOME/.zshrc 2>/dev/null; then
+    echo 'source <(fzf --zsh)' >> $HOME/.zshrc
+fi

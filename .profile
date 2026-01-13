@@ -7,5 +7,4 @@ elif command -v code > /dev/null 2>&1; then
 fi
 git config --global core.editor "$EDITOR"
 
-echo "Configuring fzf..."
-echo "source <(fzf --zsh)" >> $HOME/.zshrc
+
