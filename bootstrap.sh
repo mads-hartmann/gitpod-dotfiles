@@ -30,6 +30,16 @@ else
     echo "tig is already installed"
 fi
 
+# Clone mads-hartmann/memory if not already present
+MEMORY_DIR="$HOME/memory"
+if [ ! -d "$MEMORY_DIR" ]; then
+    echo "Cloning mads-hartmann/memory..."
+    git clone https://github.com/mads-hartmann/memory.git "$MEMORY_DIR"
+    echo "memory repo cloned to $MEMORY_DIR"
+else
+    echo "memory repo already exists at $MEMORY_DIR"
+fi
+
 # Ensure .profile exists
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 if [ ! -e "$HOME/.profile" ]; then
